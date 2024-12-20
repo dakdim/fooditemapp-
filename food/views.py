@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseNotFound
 from .models import Item
 from django.template import loader
 from .forms import ItemForm
+from django.views.generic.list import ListView
 # Create your views here.
 def index(request):
     item_list=Item.objects.all()
@@ -15,6 +16,10 @@ def index(request):
     # return HttpResponse(template.render(context,request))
     # we are using render instead of http[response in this]
     return render(request,'food/index.html',context)
+class IndexClassView(ListView):
+    model=Item;
+    template_name='food/index.html' 
+    comtext_object_name='item_list'
 
 
 
